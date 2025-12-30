@@ -23,3 +23,5 @@ Com base no dashboard, podemos observar:
 1. Baixe o arquivo `Primeiro.pbix` deste repositório.
 2. Certifique-se de ter o **Power BI Desktop** instalado.
 3. Se os dados não carregarem, aponte a fonte de dados para o arquivo `.csv` que também está disponível na pasta.
+
+**Este projeto utiliza o formato .PBIP, permitindo o versionamento granular de metadados e expressões DAX.**

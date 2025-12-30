@@ -1,0 +1,70 @@
+table Dependente
+	lineageTag: ae38d65b-b0f6-4435-9566-1e61eb1ed7e7
+
+	column ID_DEP
+		dataType: int64
+		formatString: 0
+		lineageTag: d625f6c4-d354-47c6-b6db-620920743437
+		summarizeBy: sum
+		sourceColumn: ID_DEP
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOME_DEPENDENTE
+		dataType: string
+		lineageTag: ed916099-2077-4170-bf81-b266aea4e681
+		summarizeBy: none
+		sourceColumn: NOME_DEPENDENTE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NASC_DEPENDENTE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8de505ba-20b9-4282-8999-2da63c802d34
+		summarizeBy: none
+		sourceColumn: NASC_DEPENDENTE
+
+		variation Variation
+			isDefault
+			relationship: cd3a1f78-2d3a-4576-8e10-07e2e768ef6b
+			defaultHierarchy: LocalDateTable_09815fa7-b838-4014-8df7-abfe7d202133.'Hierarquia de datas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ID_MATRICULA
+		dataType: int64
+		formatString: 0
+		lineageTag: 67ab6214-de23-4e42-8d80-e53b185d4967
+		summarizeBy: none
+		sourceColumn: ID_MATRICULA
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dependente = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\wesle\Downloads\Funcionarios_.xlsx"), null, true),
+				    Dependente_Table = Fonte{[Item="Dependente",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Dependente_Table,{{"ID_DEP", Int64.Type}, {"NOME_DEPENDENTE", type text}, {"NASC_DEPENDENTE", type date}, {"ID_MATRICULA", Int64.Type}}),
+				    #"Colocar Cada Palavra Em Maiúscula" = Table.TransformColumns(#"Tipo Alterado",{{"NOME_DEPENDENTE", Text.Proper, type text}})
+				in
+				    #"Colocar Cada Palavra Em Maiúscula"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

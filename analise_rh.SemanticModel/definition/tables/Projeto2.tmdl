@@ -1,0 +1,83 @@
+table Projeto2
+	lineageTag: 29b72411-5830-4746-a778-9bd736379e90
+
+	column ID_PROJETO
+		dataType: int64
+		formatString: 0
+		lineageTag: a9e3fa1e-0214-431c-8a34-fead2bcd017a
+		summarizeBy: sum
+		sourceColumn: ID_PROJETO
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOME_PROJETO
+		dataType: string
+		lineageTag: 8277d0a8-c140-4762-a2c7-b197a967200a
+		summarizeBy: none
+		sourceColumn: NOME_PROJETO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCRICAO
+		dataType: string
+		lineageTag: 01680ecd-fa5c-43d5-91bc-144607220d1b
+		summarizeBy: none
+		sourceColumn: DESCRICAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column INÍCIO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5496ecf7-66d1-4a1b-b57f-0ba8e87cbc93
+		summarizeBy: none
+		sourceColumn: INÍCIO
+
+		variation Variation
+			isDefault
+			relationship: 15d2885f-c0cc-410f-9090-04a0e7882a8b
+			defaultHierarchy: LocalDateTable_7bb0af18-37ab-44a9-a438-29d6bf51d332.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TÉRMINO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1163b1fc-297a-45ec-bd54-99ca3277101a
+		summarizeBy: none
+		sourceColumn: TÉRMINO
+
+		variation Variation
+			isDefault
+			relationship: f1bff4a6-8ea4-4a97-842e-b2d37553c858
+			defaultHierarchy: LocalDateTable_c89281d9-1ea3-4196-94f0-c5f76b3c19f2.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ID_DEPTO
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ec8505c-35ff-4e2f-b9d5-15e180473ecd
+		summarizeBy: none
+		sourceColumn: ID_DEPTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Projeto2 = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\wesle\Downloads\Funcionarios_.xlsx"), null, true),
+				    Projeto_Table = Fonte{[Item="Projeto",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Projeto_Table,{{"ID_PROJETO", Int64.Type}, {"NOME_PROJETO", type text}, {"DESCRICAO", type text}, {"INÍCIO", type date}, {"TÉRMINO", type date}, {"ID_DEPTO", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

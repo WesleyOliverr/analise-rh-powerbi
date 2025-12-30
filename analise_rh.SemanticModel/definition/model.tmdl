@@ -1,0 +1,29 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Cargo1","Departamento","Dependente","Funcionario","Localidade2","Projeto2","Medidas"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Cargo1
+ref table Departamento
+ref table Dependente
+ref table DateTableTemplate_6d7355cf-0b34-46e1-9214-b156377c133a
+ref table LocalDateTable_09815fa7-b838-4014-8df7-abfe7d202133
+ref table Funcionario
+ref table LocalDateTable_d1093beb-e4ba-4199-a9d7-1f9811467184
+ref table Localidade2
+ref table Projeto2
+ref table LocalDateTable_7bb0af18-37ab-44a9-a438-29d6bf51d332
+ref table LocalDateTable_c89281d9-1ea3-4196-94f0-c5f76b3c19f2
+ref table Medidas
+
+ref cultureInfo pt-BR
+

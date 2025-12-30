@@ -1,0 +1,113 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 118,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1131.5768771657797,
+            "y": 408.043548382729
+          },
+          "nodeIndex": "Cargo1",
+          "nodeLineageTag": "5aa2ad4f-2cf9-4fed-9217-80d5dfdd8ff1",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 392.17941566988634,
+            "y": 326.76878482939719
+          },
+          "nodeIndex": "Departamento",
+          "nodeLineageTag": "513bca7e-87a6-4bfc-b5cd-704c8679b290",
+          "size": {
+            "height": 145,
+            "width": 233
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 389.57687716577971,
+            "y": 9
+          },
+          "nodeIndex": "Dependente",
+          "nodeLineageTag": "ae38d65b-b0f6-4435-9566-1e61eb1ed7e7",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 710.37645520037063,
+            "y": 107
+          },
+          "nodeIndex": "Funcionario",
+          "nodeLineageTag": "a9ed2663-980e-4f97-80de-3ad656ac2345",
+          "size": {
+            "height": 369,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1131.5768771657797,
+            "y": 0
+          },
+          "nodeIndex": "Localidade2",
+          "nodeLineageTag": "e98fb948-3d5d-41a5-93f3-b031f538d538",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 278.08709676545806
+          },
+          "nodeIndex": "Projeto2",
+          "nodeLineageTag": "29b72411-5830-4746-a778-9bd736379e90",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 3,
+            "y": 110
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "ac885a1d-e169-4810-ba19-fca7185d7bca",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

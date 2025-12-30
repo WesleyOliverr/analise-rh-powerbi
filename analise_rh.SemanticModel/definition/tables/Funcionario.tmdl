@@ -1,0 +1,121 @@
+table Funcionario
+	lineageTag: a9ed2663-980e-4f97-80de-3ad656ac2345
+
+	column MATRÍCULA
+		dataType: int64
+		formatString: 0
+		lineageTag: 3007ce65-1b17-48bd-8f44-1eb0c8c7dbfc
+		summarizeBy: none
+		sourceColumn: MATRÍCULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUNCIONÁRIO
+		dataType: string
+		lineageTag: 302af64e-f229-4b92-933b-f39f28c7e616
+		summarizeBy: none
+		sourceColumn: FUNCIONÁRIO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ENDEREÇO
+		dataType: string
+		lineageTag: 04d4042c-d437-4106-a947-af2959987f34
+		summarizeBy: none
+		sourceColumn: ENDEREÇO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_LOCALIDADE
+		dataType: int64
+		formatString: 0
+		lineageTag: 3379b340-6e9c-45a8-8d38-d43d254a8b83
+		summarizeBy: none
+		sourceColumn: ID_LOCALIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cidade
+		dataType: string
+		lineageTag: ffd111a9-d6c4-420e-9872-73dd4f12ad8a
+		summarizeBy: none
+		sourceColumn: Cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column CEP
+		dataType: string
+		lineageTag: 16392598-bcf0-4590-b152-ee07ba0ecc6a
+		summarizeBy: none
+		sourceColumn: CEP
+
+		annotation SummarizationSetBy = Automatic
+
+	column FONE
+		dataType: string
+		lineageTag: 1ae7f956-c0df-4ce2-8f21-331cbab5475e
+		summarizeBy: none
+		sourceColumn: FONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_DEPTO
+		dataType: int64
+		formatString: 0
+		lineageTag: c38d083c-520e-4631-9075-dde3889397ab
+		summarizeBy: none
+		sourceColumn: ID_DEPTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_CARGO
+		dataType: int64
+		formatString: 0
+		lineageTag: 037bd169-cb2c-496d-abf8-344759349aed
+		summarizeBy: none
+		sourceColumn: ID_CARGO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ADMISSÃO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b183a311-cdae-46ef-94c0-ab1cd4e28626
+		summarizeBy: none
+		sourceColumn: ADMISSÃO
+
+		variation Variation
+			isDefault
+			relationship: daf84a7d-53ea-42ac-9dbb-6f53a4106fbe
+			defaultHierarchy: LocalDateTable_d1093beb-e4ba-4199-a9d7-1f9811467184.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SALÁRIO
+		dataType: double
+		lineageTag: c36fab67-f5bb-4c36-9b8e-79c28cb60273
+		summarizeBy: sum
+		sourceColumn: SALÁRIO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Funcionario = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\wesle\Downloads\Funcionarios_.xlsx"), null, true),
+				    Funcionario_Table = Fonte{[Item="Funcionario",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Funcionario_Table,{{"MATRÍCULA", Int64.Type}, {"FOTO", type any}, {"FUNCIONÁRIO", type text}, {"CPF", type text}, {"ENDEREÇO", type text}, {"ID_LOCALIDADE", Int64.Type}, {"Cidade", type text}, {"CEP", type text}, {"FONE", type text}, {"EMAIL", type any}, {"ID_DEPTO", Int64.Type}, {"ID_CARGO", Int64.Type}, {"NPis", type text}, {"ADMISSÃO", type date}, {"SALÁRIO", type number}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"FOTO", "CPF", "EMAIL", "NPis"}),
+				    #"Colocar Cada Palavra Em Maiúscula" = Table.TransformColumns(#"Colunas Removidas",{{"FUNCIONÁRIO", Text.Proper, type text}})
+				in
+				    #"Colocar Cada Palavra Em Maiúscula"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

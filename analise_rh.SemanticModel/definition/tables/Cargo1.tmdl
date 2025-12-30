@@ -1,0 +1,92 @@
+table Cargo1
+	lineageTag: 5aa2ad4f-2cf9-4fed-9217-80d5dfdd8ff1
+
+	column Código
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ebcb6db-e9fa-4195-b4c4-e7f7949db0e6
+		summarizeBy: none
+		sourceColumn: Código
+
+		annotation SummarizationSetBy = Automatic
+
+	column CARGO
+		dataType: string
+		lineageTag: 82e2ab05-3ecb-4438-96f1-93a2236db160
+		summarizeBy: none
+		sourceColumn: CARGO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"Cargo1","TableItemName":"CARGO (grupos)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column 'CARGO (grupos)' =
+			SWITCH(
+				TRUE,
+				ISBLANK('Cargo1'[CARGO]),
+				"(Em branco)",
+				'Cargo1'[CARGO] IN {"Advogado Júnior",
+					"Advogado Pleno",
+					"Advogado Sênior"},
+				"Advogados",
+				'Cargo1'[CARGO] IN {"Assistente I",
+					"Assistente II",
+					"Assistente III"},
+				"Assistentes",
+				'Cargo1'[CARGO] IN {"Auxiliar I",
+					"Auxiliar II"},
+				"Auxiliares",
+				'Cargo1'[CARGO] IN {"Gerente Júnior",
+					"Gerente Pleno",
+					"Gerente Sênior"},
+				"Gerentes",
+				'Cargo1'[CARGO] IN {"Operador I",
+					"Operador II"},
+				"Operadores",
+				'Cargo1'[CARGO] IN {"Programador I",
+					"Programador II"},
+				"Programadores",
+				'Cargo1'[CARGO] IN {"Sub Gerente Júnior",
+					"Sub Gerente Pleno",
+					"Sub Gerente Sênior"},
+				"Sub Gerentes",
+				'Cargo1'[CARGO]
+			)
+		lineageTag: 9d71a996-383a-403d-b34a-470aceac1050
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "Cargo1"
+				          }
+				        },
+				        "Property": "CARGO"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"c","Entity":"Cargo1"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"CARGO"}}],"GroupItems":[{"DisplayName":"(Em branco)","BlankDefaultPlaceholder":true},{"DisplayName":"Advogados","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"CARGO"}}],"Values":[[{"Literal":{"Value":"'Advogado Júnior'"}}],[{"Literal":{"Value":"'Advogado Pleno'"}}],[{"Literal":{"Value":"'Advogado Sênior'"}}]]}}},{"DisplayName":"Assistentes","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"CARGO"}}],"Values":[[{"Literal":{"Value":"'Assistente I'"}}],[{"Literal":{"Value":"'Assistente II'"}}],[{"Literal":{"Value":"'Assistente III'"}}]]}}},{"DisplayName":"Auxiliares","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"CARGO"}}],"Values":[[{"Literal":{"Value":"'Auxiliar I'"}}],[{"Literal":{"Value":"'Auxiliar II'"}}]]}}},{"DisplayName":"Gerentes","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"CARGO"}}],"Values":[[{"Literal":{"Value":"'Gerente Júnior'"}}],[{"Literal":{"Value":"'Gerente Pleno'"}}],[{"Literal":{"Value":"'Gerente Sênior'"}}]]}}},{"DisplayName":"Operadores","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"CARGO"}}],"Values":[[{"Literal":{"Value":"'Operador I'"}}],[{"Literal":{"Value":"'Operador II'"}}]]}}},{"DisplayName":"Programadores","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"CARGO"}}],"Values":[[{"Literal":{"Value":"'Programador I'"}}],[{"Literal":{"Value":"'Programador II'"}}]]}}},{"DisplayName":"Sub Gerentes","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"c"}},"Property":"CARGO"}}],"Values":[[{"Literal":{"Value":"'Sub Gerente Júnior'"}}],[{"Literal":{"Value":"'Sub Gerente Pleno'"}}],[{"Literal":{"Value":"'Sub Gerente Sênior'"}}]]}}}]}
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Cargo1 = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\wesle\Downloads\Funcionarios_.xlsx"), null, true),
+				    Cargo_Table = Fonte{[Item="Cargo",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Cargo_Table,{{"Código", Int64.Type}, {"CARGO", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,34 @@
+table Departamento
+	lineageTag: 513bca7e-87a6-4bfc-b5cd-704c8679b290
+
+	column ID_DEPTO
+		dataType: int64
+		formatString: 0
+		lineageTag: 6aeee9ff-7ff1-4278-9d8c-80010bb18b33
+		summarizeBy: none
+		sourceColumn: ID_DEPTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DEPARTAMENTO
+		dataType: string
+		lineageTag: 09d7db23-da6a-45a4-a46c-f93d9c438ce1
+		summarizeBy: none
+		sourceColumn: DEPARTAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Departamento = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\wesle\Downloads\Funcionarios_.xlsx"), null, true),
+				    Departamento_Table = Fonte{[Item="Departamento",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Departamento_Table,{{"ID_DEPTO", Int64.Type}, {"DEPARTAMENTO", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

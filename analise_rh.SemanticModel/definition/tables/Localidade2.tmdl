@@ -1,0 +1,43 @@
+table Localidade2
+	lineageTag: e98fb948-3d5d-41a5-93f3-b031f538d538
+
+	column ID_LOCALIDADE
+		dataType: int64
+		formatString: 0
+		lineageTag: c4f6a8f6-fdf1-48fc-8438-c5687b1e3e1f
+		summarizeBy: none
+		sourceColumn: ID_LOCALIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CIDADE
+		dataType: string
+		lineageTag: d31b4558-ca01-4738-9065-35412411cb0d
+		summarizeBy: none
+		sourceColumn: CIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF
+		dataType: string
+		lineageTag: 872c2d5e-36c3-4ab0-b439-eec43cd43250
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Localidade2 = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\wesle\Downloads\Funcionarios_.xlsx"), null, true),
+				    Localidade2_Table = Fonte{[Item="Localidade2",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Localidade2_Table,{{"ID_LOCALIDADE", Int64.Type}, {"CIDADE", type text}, {"UF", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,40 @@
+relationship cd3a1f78-2d3a-4576-8e10-07e2e768ef6b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dependente.NASC_DEPENDENTE
+	toColumn: LocalDateTable_09815fa7-b838-4014-8df7-abfe7d202133.Date
+
+relationship daf84a7d-53ea-42ac-9dbb-6f53a4106fbe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Funcionario.ADMISSÃO
+	toColumn: LocalDateTable_d1093beb-e4ba-4199-a9d7-1f9811467184.Date
+
+relationship 15d2885f-c0cc-410f-9090-04a0e7882a8b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Projeto2.INÍCIO
+	toColumn: LocalDateTable_7bb0af18-37ab-44a9-a438-29d6bf51d332.Date
+
+relationship f1bff4a6-8ea4-4a97-842e-b2d37553c858
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Projeto2.TÉRMINO
+	toColumn: LocalDateTable_c89281d9-1ea3-4196-94f0-c5f76b3c19f2.Date
+
+relationship AutoDetected_48d58827-2183-4163-bcc0-8a13e01c3624
+	fromColumn: Funcionario.ID_DEPTO
+	toColumn: Departamento.ID_DEPTO
+
+relationship AutoDetected_7b1c04b6-f516-4261-a0e1-c4109c0b7fc3
+	fromColumn: Projeto2.ID_DEPTO
+	toColumn: Departamento.ID_DEPTO
+
+relationship AutoDetected_c667a0ba-192c-476d-8b8a-540507f027fd
+	fromColumn: Funcionario.ID_LOCALIDADE
+	toColumn: Localidade2.ID_LOCALIDADE
+
+relationship e555459a-8191-432f-60d9-23cc47e0cad8
+	fromColumn: Funcionario.ID_CARGO
+	toColumn: Cargo1.Código
+
+relationship a98aae80-b76e-4e2f-aa65-7a57c46495f6
+	fromColumn: Dependente.ID_MATRICULA
+	toColumn: Funcionario.MATRÍCULA
+

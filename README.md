@@ -19,9 +19,16 @@ Com base no dashboard, podemos observar:
 - **Indicador de Dependentes**: Identificamos que 20 funcionários possuem dependentes, dado crucial para planejamento de benefícios.
 - **Distribuição Geográfica**: O painel permite visualizar rapidamente a alocação de funcionários por cidades como Rio de Janeiro, São Paulo e Curitiba.
 
-## 📁 Como visualizar o projeto
-1. Baixe o arquivo `Primeiro.pbix` deste repositório.
-2. Certifique-se de ter o **Power BI Desktop** instalado.
-3. Se os dados não carregarem, aponte a fonte de dados para o arquivo `.csv` que também está disponível na pasta.
+## ⚙️ Versionamento e Estrutura do Projeto
 
-**Este projeto utiliza o formato .PBIP, permitindo o versionamento granular de metadados e expressões DAX.**
+Diferente do padrão comum de salvar apenas um arquivo `.pbix`, este repositório utiliza o formato **Power BI Project (.PBIP)**. 
+
+### Por que isso é importante?
+- **Granularidade**: O projeto é decomposto em arquivos de texto (JSON e metadados), permitindo que o GitHub rastreie alterações específicas em cada medida DAX ou visual.
+- **Code Review**: Facilita a revisão de código, permitindo ver exatamente o que mudou entre uma versão e outra.
+- **Segurança e Colaboração**: Garante que o histórico de desenvolvimento esteja salvo de forma estruturada, facilitando o trabalho em equipe e a manutenção a longo prazo.
+
+## 📁 Como abrir ou vizualizar o projeto
+Para visualizar este projeto localmente:
+1. Clone este repositório.
+2. Abra o arquivo `analise_rh.pbip` no Power BI Desktop (certifique-se de que o recurso de "Salvamento de projeto" está habilitado nas opções de pré-visualização).
